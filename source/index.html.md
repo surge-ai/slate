@@ -75,7 +75,7 @@ If you need to authenticate via bearer auth (e.g., for a cross-origin request), 
 
 # Example
 
-Let's walk through an example using Hybrid to categorize companies. If you'd like to run the example yourself, find your API key in [your profile](https://app.surgehq.ai/me).
+Let's walk through an example using Surge to categorize companies. If you'd like to run the example yourself, find your API key in [your profile](https://app.surgehq.ai/me).
 
 ```ruby
 require 'httparty'
@@ -151,7 +151,6 @@ requests.post("https://app.surgehq.ai/api/projects",
 ```
 {
   "id": "17e323f1-f7e4-427c-a2d5-456743aba8",
-  "callback_url": "https://www.mywebsite.com/hybrid_callback",
   "name": "Categorize this website",
   "num_tasks": 1000,
   "num_tasks_completed": 239,
@@ -164,7 +163,6 @@ requests.post("https://app.surgehq.ai/api/projects",
 Parameter | Type | Description
 --------- | ---- | -----------
 id | string |
-callback_url | string | Once a task is completed, it is POSTed to this url.
 created_at | string |
 fields_template | string | A template describing how fields are shown to workers working on the task. For example, if `fields_template` is "<a href="{{url}}">{{company_name}}</a>", then workers will be shown a link to the company.
 instructions | string | Instructions shown to workers describing how they should complete the task.
@@ -257,7 +255,6 @@ requests.post("https://app.surgehq.ai/api/projects",
 ```json
 {
   "id": "17e323f1-f7e4-427c-a2d5-456743aba8",
-  "callback_url": "https://www.mywebsite.com/hybrid_callback",
   "name": "Categorize this website",
   "num_tasks": 0,
   "num_tasks_completed": 0,
@@ -276,7 +273,6 @@ Parameter | Type | Description
 name | string | Name to give your project. (required)
 payment_per_response | float | Amount in dollars to pay workers for each response. (required)
 question | array | An array of JSON objects that define the questions that are shown to workers. Each question object takes a `text` field (the question that gets shown to workers), an optional `options` array (for `multiple_choice` and `checkbox`, which define the answer options that workers see), an optional `type` field (one of `free_response`, `multiple_choice`, or `checkbox`; by default, if the field is not provided, then question objects without `options` are assumed to be `free_response`, and question objects with `options` are assumed to be `multiple_choice`), and an optional `required` field (a boolean that defines whether or not the question must be answered; default true). (required)
-callback_url | string | URL where completed tasks will be POSTed. (optional, default null)
 num_workers_per_task | integer | Number of workers who work on each task. (optional, default 1)
 
 ## List all projects
@@ -318,7 +314,6 @@ curl https://app.surgehq.ai/api/projects \
 [
   {
     "id": "17e323f1-f7e4-427c-a2d5-456743aba8",
-    "callback_url": "https://www.mywebsite.com/hybrid_callback",
     "name": "Categorize customer websites",
     "num_tasks": 1000,
     "num_tasks_completed": 239,
@@ -328,7 +323,6 @@ curl https://app.surgehq.ai/api/projects \
   },
   {
     "id": "81533541-0359-4d4b-a545-af38a2cb3e8c",
-    "callback_url": null,
     "name": "Label product images",
     "num_tasks": 5000,
     "num_tasks_completed": 4315,
@@ -383,7 +377,6 @@ curl https://app.surgehq.ai/api/projects/17e323f1-f7e4-427c-a2d5-456743aba8 \
 ```json
 {
   "id": "17e323f1-f7e4-427c-a2d5-456743aba8",
-  "callback_url": "https://www.mywebsite.com/hybrid_callback",
   "name": "Categorize this website",
   "num_tasks": 1000,
   "num_tasks_completed": 239,
@@ -432,7 +425,6 @@ curl https://app.surgehq.ai/api/projects/17e323f1-f7e4-427c-a2d5-456743aba8/paus
 ```json
 {
   "id": "17e323f1-f7e4-427c-a2d5-456743aba8",
-  "callback_url": "https://www.mywebsite.com/hybrid_callback",
   "name": "Categorize this website",
   "num_tasks": 1000,
   "num_tasks_completed": 239,
@@ -481,7 +473,6 @@ curl https://app.surgehq.ai/api/projects/17e323f1-f7e4-427c-a2d5-456743aba8/resu
 ```json
 {
   "id": "17e323f1-f7e4-427c-a2d5-456743aba8",
-  "callback_url": "https://www.mywebsite.com/hybrid_callback",
   "name": "Categorize this website",
   "num_tasks": 1000,
   "num_tasks_completed": 239,
@@ -530,7 +521,6 @@ curl https://app.surgehq.ai/api/projects/17e323f1-f7e4-427c-a2d5-456743aba8/canc
 ```json
 {
   "id": "17e323f1-f7e4-427c-a2d5-456743aba8",
-  "callback_url": "https://www.mywebsite.com/hybrid_callback",
   "name": "Categorize this website",
   "num_tasks": 1000,
   "num_tasks_completed": 239,
@@ -556,7 +546,7 @@ Cancels a project.
   "is_complete": true,
     
   "fields": {
-    "company": "Hybrid",
+    "company": "Surge",
     "city": "San Francisco",
     "state": "CA"
   },
@@ -600,7 +590,7 @@ HTTParty.post("https://app.surgehq.ai/api/projects/17e323f1-f7e4-427c-a2d5-45674
   basic_auth: { username: "{{YOUR_API_KEY}}" },
   body: {
     "fields": {
-      "company": "Hybrid",
+      "company": "Surge",
       "city": "San Francisco",
       "state": "CA"
     }    
@@ -615,7 +605,7 @@ requests.post("https://app.surgehq.ai/api/projects/17e323f1-f7e4-427c-a2d5-45674
   auth = ("{{YOUR_API_KEY}}", ""),
   data = {
     "fields": {
-      "company": "Hybrid",
+      "company": "Surge",
       "city": "San Francisco",
       "state": "CA"
     }
@@ -640,7 +630,7 @@ curl https://app.surgehq.ai/api/projects/17e323f1-f7e4-427c-a2d5-456743aba8/task
   "is_complete": false,
     
   "fields": {
-    "company": "Hybrid",
+    "company": "Surge",
     "city": "San Francisco",
     "state": "CA"
   },
@@ -701,7 +691,7 @@ curl https://app.surgehq.ai/api/projects/b31ede78-afdf-4938-b775-8813453c7fc5/ta
     "is_complete": true,
     
     "fields": {
-      "company": "Hybrid",
+      "company": "Surge",
       "city": "San Francisco",
       "state": "CA"
     },
@@ -794,7 +784,7 @@ curl https://app.surgehq.ai/api/tasks/38da6bc5-a644-41b9-a964-4678bc7375c6 \
   "is_complete": true,
   
   "fields": {
-    "company": "Hybrid",
+    "company": "Surge",
     "city": "San Francisco",
     "state": "CA"
   },
