@@ -16,4 +16,13 @@ Detailed instructions are [here on the Slate Wiki](https://github.com/slatedocs/
 1. Run `bundle exec middleman build --clean` to compile docs into the `build` directory. 
 2. Copy the newly generated fonts, image, javascripts, and css folders from `build` to `gondor/public/docs/`
 3. Copy the contents of build/index.htmll to `gondor/app/views/website/human_api_docs.html.erb`
-4. Replace {{YOUR_API_KEY}} with <%= @api_key %>.
+4. Replace all instances of "{{YOUR_API_KEY}}" with <%= @api_key %>. so people can see their own API key on the docs if they are logged in.
+5. Edit the TOC foot section to check if the current user is logged in. The updated version looks like this:
+
+```
+  <% unless current_user %>
+    <ul class="toc-footer">
+      <li><a href='https://www.app.surgehq.ai/poster_sign_up'>Sign up for an account</a></li>
+    </ul>
+  <% end %>
+  ```
